@@ -4,7 +4,7 @@ import { useRequest } from 'alova'
 import { ElMessage } from 'element-plus'
 import { Select, CloseBold, EditPen } from '@element-plus/icons-vue'
 import { useUserStore } from '@/stores/user'
-import { SexType, IsYet } from '@/services/types'
+import {SexType, IsYet, OnlineStatus} from '@/services/types'
 import type { BadgeType } from '@/services/types'
 import apis from '@/services/apis'
 import { judgeClient } from '@/utils/detectDevice'
@@ -85,6 +85,13 @@ const onCancelEditName = async () => {
   editName.isEdit = false
   editName.tempName = ''
 }
+
+const outLogin = () => {
+  userStore.isSign = false
+  // FIXME 可以不需要赋值了，单独请求了接口。
+  userStore.userInfo = { }
+  localStorage.clear()
+}
 </script>
 
 <template>
@@ -155,6 +162,7 @@ const onCancelEditName = async () => {
       </div>
 
       <el-alert class="setting_tips" title="Tips: MallChat名称不允许重复，快来抢占" type="warning" :closable="false" />
+      <a class="login-link" @click="outLogin">退出</a>
 
       <ul class="badge_list">
         <li class="badge_item" v-for="badge of badgeList" :key="badge.id">

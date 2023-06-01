@@ -48,6 +48,11 @@ export enum WsRequestMsgType {
    * 3用户认证
    */
   Authorization,
+
+  /**
+   * 游客登录
+   */
+  TOURIST_LOGIN
 }
 
 export type WsReqMsgContentType = { type: WsRequestMsgType; data?: Record<string, unknown> }

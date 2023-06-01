@@ -12,7 +12,7 @@ import ChatBox from './components/ChatBox/index.vue'
       <ChatBox />
     </div>
     <footer class="footer">
-      <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener">闽ICP备2023004110号</a>
+      <a target="_blank" rel="noopener">@万人大群聊</a>
     </footer>
 
     <LoginBox />

@@ -12,6 +12,8 @@ const client = judgeClient()
 
 import UserList from '../UserList/index.vue'
 import ChatList from '../ChatList/index.vue'
+import wsIns from "@/utils/websocket";
+import {WsRequestMsgType} from "@/utils/wsType";
 
 const chatStore = useChatStore()
 const isSelect = ref(false)
@@ -60,6 +62,8 @@ const sendMsgHandler = (e: Event | KeyboardEvent) => {
 // 显示登录框
 const loginStore = useWsLoginStore()
 const onShowLoginBoxHandler = () => (loginStore.showLogin = true)
+
+
 
 // 是否已登录
 const userStore = useUserStore()
@@ -124,7 +128,7 @@ const insertText = (emoji: string) => {
                 />
                 <div class="chat-not-login-mask" :hidden="isSign">
                   <ElIcon class="icon-lock"><IEpLock /></ElIcon>
-                  <a class="login-link" @click="onShowLoginBoxHandler">点我登录</a>之后再发言~
+                  <a class="login-link" @click="onShowLoginBoxHandler">登录</a>之后再发言~
                 </div>
               </div>
               <el-popover

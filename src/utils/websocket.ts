@@ -177,6 +177,20 @@ class WS {
         groupStore.filterUser(data.uid)
         break
       }
+      case WsResponseMessageType.GiteeLoginReponseURl: {
+        const url = params.data as { loginUrl: string }
+        console.log("gitee url:",url)
+
+        const iWidth = 400;                         //弹出窗口的宽度;
+        const iHeight = 450;                        //弹出窗口的高度;
+
+        const iTop = (window.screen.height-30-iHeight)/2;       //获得窗口的垂直位置;
+        const iLeft = (window.screen.width-10-iWidth)/2;        //获得窗口的水平位置;
+
+        window.open(url,name,'height='+iHeight+',,innerHeight='+iHeight+',width='+iWidth+',innerWidth='+iWidth+',top='+iTop+',left='+iLeft+',toolbar=no,menubar=no,scrollbars=auto,resizeable=no,location=no,status=no');
+
+        break;
+      }
       default: {
         console.log('接收到未处理类型的消息:', params)
         break

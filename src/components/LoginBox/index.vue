@@ -5,6 +5,7 @@ import QrCode from 'qrcode.vue'
 import wsIns from "@/utils/websocket";
 import {WsRequestMsgType} from "@/utils/wsType";
 import {CloseBold, Select} from "@element-plus/icons-vue";
+import {ElMessage} from "element-plus";
 
 const loginStore = useWsLoginStore()
 const visible = computed({
@@ -26,14 +27,25 @@ watchEffect(() => {
   if (visible.value && !loginQrCode.value) {
     // 获取登录二维码
     // loginStore.getLoginQrCode()
+    touristLoginHandlerClose();
   }
 })
 
 const touristLoginHandler = () => {
   touristInfo.isEdit=true;
 }
+const touristLoginHandlerClose = () => {
+  touristInfo.isEdit=false;
+}
+const giteeLoginHandler = ()=>{
+  wsIns.send({ type: WsRequestMsgType.GITEE_LOGIN})
+}
 
 const touristLogin = () => {
+  if(touristInfo.userName==null || touristInfo.userName.trim()==""){
+    ElMessage.warning('用户名不能为空哦~');
+    return;
+  }
   wsIns.send({ type: WsRequestMsgType.TOURIST_LOGIN,data:{"userName":touristInfo.userName} })
 }
 const wxLoginHandler = () =>{
@@ -56,7 +68,7 @@ const touristInfo = reactive({
 
     </div>
     <div class="login_box">
-      <img class="login_logo" src="@/assets/logo.jpeg" alt="MallChat" />
+      <img class="login_logo" src="@/assets/logo.png" alt="MallChat" />
       <p class="login_slogan">边聊边买，岂不快哉~</p>
 <!--      <div class="login_qrcode_wrapper" v-loading="!loginQrCode">-->
 <!--        <QrCode class="login_qrcode" v-if="loginQrCode" :value="loginQrCode" :size="328" :margin="5" />-->
@@ -73,19 +85,26 @@ const touristInfo = reactive({
         <a class="login-link" @click="touristLoginHandler"><strong class="ts_login_desc_bold">游客</strong>登录</a>
         &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
         <a class="login-link" @click="wxLoginHandler"><strong class="login_desc_bold">微信</strong>登录</a>
+
+        &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+        <a class="login-link" @click="giteeLoginHandler"><strong class="login_desc_bold">Gitee</strong>登录</a>
       </p>
 
       <div class="name_edit_wrapper" v-show="touristInfo.isEdit">
-        <ElInput type="text" v-model="touristInfo.userName" maxlength="6" />
-        <el-button class="name_edit_icon" size="small" type="primary" @click="touristLogin">
-          登录
-        </el-button>
-        <el-button
-            class="name_edit_icon"
-            size="small"
-            type="danger"
-            @click="touristLogin"
-        >取消</el-button>
+        <ElInput type="text" v-model="touristInfo.userName" placeholder="请输入你的名称" maxlength="6" />
+        <div style="margin-top: 5px;align-content: center">
+          <el-button class="name_edit_icon" size="small" type="primary" @click="touristLogin">
+            登录
+          </el-button>
+          <el-button
+              class="name_edit_icon"
+              size="small"
+              type="danger"
+              @click="touristLoginHandlerClose"
+          >取消</el-button>
+        </div>
+
+
       </div>
 
 

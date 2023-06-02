@@ -93,7 +93,7 @@ const initConnection = () => {
   connection?.removeEventListener('close', onConnectClose)
   connection?.removeEventListener('error', onConnectError)
   // 建立链接
-  connection = new WebSocket('ws://localhost:8090/')
+  connection = new WebSocket('ws://127.0.0.1:8090/')
   // 收到消息
   connection.addEventListener('message', onConnectMsg)
   // 建立链接

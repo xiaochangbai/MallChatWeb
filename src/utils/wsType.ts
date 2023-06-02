@@ -30,6 +30,8 @@ export enum WsResponseMessageType {
    * 7.禁用的用户
    */
   InValidUser,
+
+  GiteeLoginReponseURl
 }
 
 /**
@@ -52,7 +54,12 @@ export enum WsRequestMsgType {
   /**
    * 游客登录
    */
-  TOURIST_LOGIN
+  TOURIST_LOGIN,
+
+/**
+ * gitee login
+ */
+  GITEE_LOGIN
 }
 
 export type WsReqMsgContentType = { type: WsRequestMsgType; data?: Record<string, unknown> }

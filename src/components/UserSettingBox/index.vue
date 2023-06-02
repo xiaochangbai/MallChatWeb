@@ -8,6 +8,7 @@ import {SexType, IsYet, OnlineStatus} from '@/services/types'
 import type { BadgeType } from '@/services/types'
 import apis from '@/services/apis'
 import { judgeClient } from '@/utils/detectDevice'
+import {LoginStatus, useWsLoginStore} from "../../stores/ws";
 
 const client = judgeClient()
 
@@ -91,6 +92,11 @@ const outLogin = () => {
   // FIXME 可以不需要赋值了，单独请求了接口。
   userStore.userInfo = { }
   localStorage.clear()
+  const loginStore = useWsLoginStore()
+  loginStore.loginStatus = LoginStatus.Init
+  // 关闭登录弹窗
+  loginStore.showLogin = false
+  emit('dialogVisibleEvent',false)
 }
 </script>
 

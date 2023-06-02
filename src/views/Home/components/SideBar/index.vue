@@ -2,9 +2,8 @@
 
 <template>
   <ul class="list">
-    <li class="item active"><img class="item-avatar" src="@/assets/logo.jpeg" alt="群聊" />万人大群</li>
-    <li class="item active"><img class="item-avatar" src="@/assets/logo.jpeg" alt="群聊" />万人大群</li>
-    <li class="item active"><img class="item-avatar" src="@/assets/logo.jpeg" alt="群聊" />万人大群</li>
+    <li class="item active"><img class="item-avatar" src="@/assets/logo.png" alt="群聊" />万人大群</li>
+    <li class="item active"><img class="item-avatar" src="/rabbit.svg" alt="群聊" />万人大群</li>
   </ul>
 </template>
 

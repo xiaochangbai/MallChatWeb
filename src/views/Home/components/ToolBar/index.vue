@@ -71,7 +71,7 @@ const toggleGroupListShow = () => (groupStore.showGroupList = !groupStore.showGr
 
     <el-icon class="menu-icon" color="#fff" :size="32" @click="toggleGroupListShow"><IEpFold /></el-icon>
 
-    <UserSettingBox v-model="visible" />
+    <UserSettingBox v-model="visible" @dialogVisibleEvent="visible=false" />
   </aside>
 </template>
 
